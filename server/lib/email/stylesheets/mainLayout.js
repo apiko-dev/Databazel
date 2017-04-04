@@ -1,0 +1,66 @@
+const styles = {
+  container: {
+    maxWidth: '600px',
+    margin: '0 auto',
+  },
+  mainDiv: {
+    width: '100%',
+  },
+  link: {
+    textDecoration: 'none',
+    textTransform: 'capitalize',
+    color: '#54769b',
+  },
+  logo: {
+    width: '132px',
+    height: '74px',
+    display: 'block',
+    margin: '0 auto',
+  },
+  button: {
+    display: 'block',
+    width: '100%',
+    height: '36px',
+    marginBottom: '30px',
+    marginTop: '30px',
+    lineHeight: '36px',
+    fontSize: '14px',
+    backgroundColor: '#54769b',
+    color: 'white',
+    textDecoration: 'none',
+    textTransform: 'capitalize',
+    textAlign: 'center',
+    borderRadius: '3px',
+    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.32)',
+  },
+  p: {
+    lineHeight: '22px',
+    marginTop: '15px',
+    marginBottom: '15px',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    color: '#706f70',
+  },
+  bottomDiv: {
+    textAlign: 'left',
+    fontSize: '12px',
+    lineHeight: '19px',
+    color: '#bdb9bd',
+    marginTop: '45px',
+    fontFamily: 'Cabin,Avenir,sans-serif',
+  },
+  thanksP: {
+    textAlign: 'left',
+    color: '#8f8f8f',
+    fontSize: '14px',
+    lineHeight: '21px',
+    marginTop: '65px',
+    fontFamily: '"Open Sans",sans-serif',
+  },
+  h5: {
+    fontSize: '20px',
+    marginTop: '50px',
+    fontFamily: '"Open Sans",sans-serif',
+  },
+};
+export default styles;

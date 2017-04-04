@@ -1,0 +1,21 @@
+{
+  "public": {
+    "quasar": {
+      "host": "localhost",
+      "port": "20223"
+    }
+  },
+  "private": {
+    "gMail": {
+      "_comment": "Enter login, password, host and port - was used https://www.mailgun.com/",
+      "login": "login",
+      "password": "password",
+      "host": "host",
+      "port": "port"
+    }
+  },
+  "kadira": {
+    "appId": "",
+    "appSecret": ""
+  }
+}

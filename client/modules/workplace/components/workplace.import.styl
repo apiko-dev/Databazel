@@ -1,0 +1,298 @@
+$area-key()
+  height 100%
+  width 100%
+  line-height 30px
+  padding 0 5px
+  font-size 14px
+  $table-outline(#BDBDBD)
+
+$table-outline(color)
+  outline 2px dashed color
+
+.rotate90
+  transform rotate(90deg)
+
+.collection-fields
+  background-color #EEEEEE
+  box-shadow inset rgba(0, 0, 0, 0.3) 0 0 5px
+  overflow-y auto
+  .left-area-key
+    $area-key()
+    float left
+  .right-area-key
+    $area-key()
+    float right
+
+.object-tree
+  padding 7px 0
+  .nest-level-1
+    padding-left 7px
+  for num in (2..20)
+    .nest-level-{num}
+      padding-left 10px * num
+
+  .object-tree-item-label
+    font-size 14px
+    float right
+    width calc(100% - 17px)
+    cursor pointer
+    padding 3px 30px 3px 0
+    height 23px
+    .object-tree-key
+      max-width: calc(100% - 45px);
+      display: block;
+      text-overflow ellipsis
+      white-space nowrap
+      overflow hidden
+      float left
+      margin-right 5px
+      &.collection
+        max-width: calc(100% - 80px);
+  .tree-view_item
+    height 23px
+    &:hover
+      background-color #E0E0E0
+  .tree-view_arrow
+    margin-top 2px
+
+.joining-collections
+  box-shadow rgba(0, 0, 0, 0.3) 0 0 5px
+
+.drag-container
+  position absolute
+  left -1000px
+  .dragged-element
+    display inline-block
+    background-color rgba(0, 188, 212, 1)
+    color #fff
+    font-size 12px
+    padding 2px 20px
+
+.table-col-header
+  padding 0 12px
+  cursor pointer
+  line-height 48px
+  margin 8px
+  .table-header-label
+    display block
+    float left
+    height 15px
+    line-height 15px
+    margin 17px 0
+    max-width calc(100% - 50px)
+  .sort-area:hover
+    color #00BCD4
+  &.active-col
+    $table-outline(#80deea)
+    &:hover
+      $table-outline(#80deea)
+  &:hover
+    $table-outline(#d6d6d6)
+
+.chart-canvas
+  display flex
+  canvas
+    margin auto
+
+.preview-wrap
+  height 100%
+  .preview
+    width calc(100% - 48px)
+    float left
+
+.preview-footer
+  border-top 1px solid rgb(224, 224, 224)
+  min-height 48px
+  .preview-saveForm
+    display inline-block
+  .preview-handleDashboards
+    display inline-block
+    .invisible
+      display none !important
+  .preview-pagination
+    overflow hidden
+    float right
+    right 15px
+    bottom 0
+    .text-pagination
+      padding 16px
+      font-size 14px
+    .action-pagination,
+    .text-pagination
+      float right
+      margin-right 15px
+
+.filter-form
+  padding 5px 12px
+
+.string-filter
+  .filter-field
+    display inline-block
+  .extend-filter
+    text-align center
+    padding-bottom 5px
+
+.date-filter-item
+  text-align right
+  & > div
+    display inline-block
+    margin-left 8px
+
+.chartdata-table-body td
+  padding 0 12px !important
+
+.drill-down-number
+  vertical-align super
+
+.chartName
+  position absolute
+  top -58px
+  left 0
+  z-index 1101
+  color white
+
+.constructor-model
+  width 100%
+  padding 0
+  margin-top 12px
+  background-color #eee
+  flex-shrink 0
+  .part-name
+    font-size 14px
+    padding 5px 5px 5px 12px
+  .row
+    background-color #e0e0e0
+    display flex
+    align-items stretch
+  .constructor-part
+    padding 2px 3px
+    box-shadow inset rgba(0, 0, 0, 0.3) 0 0 5px
+    overflow-x hidden
+    background-color #EEEEEE
+    min-height 162px
+    .field-name
+      height 32px
+      vertical-align middle
+      line-height 36px
+      overflow hidden
+      text-overflow ellipsis
+    .drop-fields-area
+      margin 5px 12px
+      textAlign center
+      padding 8px 16px
+      color grey
+      font-size 0.7em
+
+.table-constructor
+  width calc(100% - 50px)
+  float left
+  .type-btn
+    display inline-block
+  .paper-cols
+    width calc(100% - 76px)
+    float right
+  .paper-rows
+    margin-top 12px
+    float left
+  .paper-values
+    height 274px
+    margin-top 12px
+    width calc(100% - 76px)
+    float right
+    .drop-area
+      line-height 248px
+
+.toggle-sidebar-state-tab
+    cursor pointer
+    width 10px
+    height 39px
+    background-color #e0e0e0
+    box-shadow rgba(0,0,0,0.157) 2px 3px 4px
+    &.opened
+      position absolute
+      top -10px
+      right 1px
+    &.closed
+      margin-left -6px
+      margin-top -10px
+
+.data-sidebar
+  margin -12px 5px -12px -12px
+  padding 0 12px
+  .sidebar-content
+    background-color #eee
+    box-shadow inset rgba(0, 0, 0, 0.3) 0 0 5px
+    margin-bottom 12px
+    padding 10px
+    font-size 14px
+  .sidebar-constructor
+    height calc(100% - 48px)
+    display flex
+    flex-direction column
+
+.data-view
+  height inherit
+
+.chart-sidebar-container
+  width 48px
+  height calc(100% + 24px)
+  float right
+  margin -12px -12px -12px
+
+.workplace
+  height inherit
+  .data-sidebar-wrap
+    height inherit
+  .data-sidebar
+    height calc(100% + 24px)
+
+.workplace.close
+  .data-sidebar-wrap
+    display none
+  .data-view
+    width 100%
+    margin-top -30px
+    margin-left 5px
+
+.collections-list-container
+  .collections-list-wrapper
+    padding-top 14px
+  .collections-list
+    max-height calc(100% - 36px)
+    overflow-y auto
+    overflow-x hidden
+    .actions-btn
+      float right
+
+.pivot-table
+  overflow auto
+  & > div
+    float left
+  .pivot-total
+    font-weight 600
+
+.toggle-column > div
+  flex-direction: column
+
+.chart-sidebar
+  height 100%
+  .sidebar-content
+    height calc(100% - 60px)
+
+.expression-container
+  display inline-block
+  width calc(100% - 50px)
+  float right
+  height 30px
+  margin-top 10px
+
+.drop-down
+  display inline-block
+
+.ReactCodeMirror
+  .CodeMirror
+    height auto
+
+.quasar-error
+  padding-top 10px
+  padding-left 10px

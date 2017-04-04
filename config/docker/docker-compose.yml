@@ -1,0 +1,51 @@
+version: '2'
+services:
+  quasar:
+    build:
+      context: ./quasar
+      args:
+        quasar_settings:
+          '{
+            "server": {
+              "port": 20223
+            },
+            "mountings": {
+            }
+          }'
+    image: databazel/quasar
+    network_mode: host
+
+  mongo:
+    image: mongo:3.2.10
+    ports:
+          - "27017:27017"
+    volumes:
+      - "./mongo_data/db:/data/db"
+
+  databazel:
+    build:
+      context: ./databazel
+      args:
+        meteor_settings:
+          '{
+            "server": {
+              "port": 20223
+            },
+            "public": {
+              "quasar": {
+                "host": "127.0.0.1",
+                "port": "20223"
+              }
+            },
+            "private": {
+              "gMail": {
+                "login": "postmaster@noreply.jssolutionsdev.com",
+                "password": "78eaa71f6a16077031b202947156df35",
+                "host": "smtp.mailgun.org",
+                "port": "465"
+              }
+            }
+          }'
+    image: databazel/databazel
+    tty: true
+    network_mode: host

@@ -1,0 +1,78 @@
+.loading
+  position absolute
+  height 100%
+  width calc(100% - 12px)
+  background rgba(255, 255, 255, .4)
+  top 0
+  left 0
+  margin 0 6px
+  & > div
+    top calc(50% - 50px)
+    left calc(50% - 50px)
+
+.loading-centered
+  margin 0
+  width calc(100% - 20px)
+  z-index 1
+
+.loading-preview
+  width: calc(100% + 4px)
+  margin: 0
+  z-index: 1101
+
+.sidebar
+  .logo
+    margin 24px
+    color #00BCD4
+  .chart-modified-ago
+    font-size 0.7em
+    color grey
+    margin-left 10px
+
+.focus-elements
+  .blackout
+    position absolute
+    width 100%
+    height 100%
+    background-color rgba(0, 0, 0, .1)
+    transition all 0.5s
+    z-index 10000
+  .backlightDrag
+    z-index 10001
+    position relative
+  .backlight
+    z-index 10001
+    position relative
+    background-color #fff
+
+.drop-area-container
+  padding 7px
+  height 100%
+  .drop-area
+    height 100%
+    border 2px dashed #d6d6d6
+    color #bdbdbd
+    text-align center
+    line-height 45px
+  &.rotate
+    width 64px
+    height 274px
+    .drop-area .label
+      transform rotate(-90deg)
+      position relative
+      width 100px
+      top 110px
+      left -25px
+
+.app-bar-content
+  width: calc(100% - 147px);
+  padding-left: 35px;
+  .left-content
+    float left
+  .right-content
+    float right
+
+.format-number-item button
+  width 32px !important
+  height 32px !important
+  padding 4px !important

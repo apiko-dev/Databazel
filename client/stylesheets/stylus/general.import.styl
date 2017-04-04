@@ -1,0 +1,74 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900&subset=latin,cyrillic);
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://fonts.gstatic.com/s/materialicons/v17/2fcrYFNaTjcS6g4U3t-Y5UEw0lE80llgEseQY3FEmqw.woff2) format('woff2');
+}
+
+html
+  height 100%
+
+body, #react-root, .main-layout
+  height inherit
+
+.main-container
+  height calc(100% - 51px)
+  & > .col-xs-12
+    height 100%
+
+body
+  background #eee
+  font-family 'Roboto', sans-serif
+  margin 0
+  overflow-x hidden
+
+body.none-scroll-bar
+  overflow-y hidden
+
+input:-webkit-autofill
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+
+a
+  text-decoration none
+  color rgb(0, 188, 212)
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.main-container > .col-xs-12
+  padding 0
+
+.main-container > .col-xs-12 > .row
+  padding 6px
+
+.text-muted
+  color #BDBDBD
+
+.error
+  color rgb(244, 67, 54)
+
+.clip
+  white-space nowrap
+  overflow hidden
+  text-overflow ellipsis
+
+.clearfix
+  clear both
+
+.loading
+  min-height 200px
