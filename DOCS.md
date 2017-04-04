@@ -1,3 +1,4 @@
+![](https://s3-eu-west-1.amazonaws.com/jssolutions/databazel/imgs/bg_databazel.png)
 <ol>
  <li><b>DataBase.</b>
 To start working with Databazel add a database to the app by typing its Mongo_URL and name it the way you like.
