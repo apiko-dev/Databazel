@@ -6,7 +6,7 @@ To start working with Databazel add a database to the app by typing its Mongo_UR
 </li>
  <li><b>Creating Charts.</b>
 Start creating your chart with choosing a DB (if you have added more than one). Then choose a collection to work with. You can join two collections as well.
-<iframe width="560" height="315" src="https://www.youtube.com/embed/o_QK66x899s" frameborder="0" allowfullscreen></iframe>
+<a href="https://www.youtube.com/watch?v=o_QK66x899s"><img src="https://s3-eu-west-1.amazonaws.com/jssolutions/databazel/imgs/youtube_screen.png" /> </a>
 </li>
  <ol type="I">
 <li><b>Collection fields.</b>
@@ -51,9 +51,10 @@ When needed data is fetched from the DB, we are ready to visualize it. It is pre
 <li><b>Dashboard.</b> There is a dashboard for viewing the charts. It is a flexible workplace to check out your data from mongoDB. Add charts, resize and place them any way you like.
 To be sure you are up to date with your data, toggle “Autorefresh” button.</li>
 <li><b>User system.</b> The chart/dashboard can be accessed only by the user who created it. Simple user system allows to share charts/dashboards to other (previously invited) app users. Users, the chart has been shared to, have full access to the chart.
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_zOSNpMhi9w" frameborder="0" allowfullscreen></iframe>
+
+<a href="https://www.youtube.com/watch?v=_zOSNpMhi9w&t=1s"><img src="https://s3-eu-west-1.amazonaws.com/jssolutions/databazel/imgs/youtube_screen_2.png" /> </a>
+
 </li>
-<li><b>Helpdesk.</b> Have any issues or questions, feel free to contact us via <a href="helpdesk.databazel.com">trello board.</a></li>
 </ol>
 
 <h5>Appendixes</h5>
