@@ -41,6 +41,10 @@ Run
 Email: `admin@admin.com`
 Password: `admin`
 
+# License 
+
+The source code for Databazel is made available under the ![Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0.html) General Public License (a commercial license is also available from ![Apiko Software](https://jssolutionsdev.com/)).
+
 -------------
 
 Made by [![Custom Software Development Company](https://s3-eu-west-1.amazonaws.com/jssolutions/github/jss_xs.png)](http://jssolutionsdev.com/?github=Databazel) - [Custom Software Development Company](http://jssolutionsdev.com/?github=Databazel)
