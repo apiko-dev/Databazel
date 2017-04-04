@@ -43,7 +43,7 @@ Password: `admin`
 
 # License 
 
-The source code for Databazel is made available under the ![Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0.html) General Public License (a commercial license is also available from ![Apiko Software](https://jssolutionsdev.com/)).
+The source code for Databazel is made available under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0.html) General Public License (a commercial license is also available from [Apiko Software OU](https://jssolutionsdev.com/) ).
 
 -------------
 
