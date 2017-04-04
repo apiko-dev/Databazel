@@ -18,4 +18,25 @@ You <b>can share</b> the created charts with your teammates.
 
 # Start application
 
+## Config settings.json
+
+```
+
+"gMail": {
+  "_comment": "Enter login, password, host and port - was used https://www.mailgun.com/",
+  "login": "login",
+  "password": "password",
+  "host": "host",
+  "port": "port"
+}
+
+```
+
+Run
+
 `sh databasel.sh`
+
+## Default user
+
+Email: `admin@admin.com`
+Password: `admin`
