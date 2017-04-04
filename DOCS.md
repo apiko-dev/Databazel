@@ -10,24 +10,32 @@ Start creating your chart with choosing a DB (if you have added more than one). 
  <ol type="I">
 <li><b>Collection fields.</b>
 You will see fields’ names and types of first 100 documents in the collection. Fields of nested objects are collapsed for default.
-![](/content/images/2016/09/a67f61024beb086e58787cbeae57eba1.gif)
+
+<img src="https://s3-eu-west-1.amazonaws.com/jssolutions/databazel/imgs/Collection_fields.gif" />
+
 </li>
    <li><b>Table constructor.</b>
 You can get raw data with “simple table” mode or perform grouping and aggregation operations in “pivot table” mode. To fetch data you need to just drag&drop the necessary field to the constructor or preview area. You can disable “Live mode” to stop fetching data after any change and enable it back to apply all changes to table at once.</li>
 <ol type="i">
 <li><b>Simple table.</b>
 You can adjust the result by modifying the expression of the column (see appendix B.1). Check out pagination to manage the quantity of rows.
-![](/content/images/2016/10/simple_table_mode.png)
+
+<img src="https://s3-eu-west-1.amazonaws.com/jssolutions/databazel/imgs/Simple+table.png" />
+
 </li>
 <li><b>Pivot table.</b>
 Fast way to see the overall picture (see appendix  A).
-![](/content/images/2016/10/privot_table_clored.png)
+
+<img src="https://s3-eu-west-1.amazonaws.com/jssolutions/databazel/imgs/Pivot+table.png" />
+
 </li>
 <li><b>Filtering, sorting & formatting numbers.</b>
 Filter the data by fields in the constructors and sort it by clicking on the column header. You can format the view of numbers by going to context menu and entering the template.</li>
 <li><b>SQL-like syntax.</b>
 Querying to MongoDB could be tricky. To be sure you see what you need you might want to check out SQL-like syntax of mongo query (see appendix B).
-![](/content/images/2016/10/sql-query.png)
+
+<img src="https://s3-eu-west-1.amazonaws.com/jssolutions/databazel/imgs/sql-query.png" />
+
 </li>
 </ol>
   <li>
