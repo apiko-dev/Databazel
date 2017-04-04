@@ -14,7 +14,7 @@ Our solution is <b>completely web-based</b> so all you need to get started is a 
 
 You <b>can share</b> the created charts with your teammates.
 
-<b>[Overview](https://github.com/JSSolutions/Databazel/blob/master/Overview.md)</b>
+<b>[Overview](https://github.com/JSSolutions/Databazel/blob/master/docs/OVERVIEW.md)</b>
 
 # Start application
 
