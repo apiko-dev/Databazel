@@ -4,7 +4,7 @@
 ##### Note, it is very important to use specific `node` version while installing node_modules and deploying Databazel.
 You can check required node version by typing `meteor node -v` at your
 terminal while in Databazel directory.
-You can use [nwm](https://github.com/creationix/nvm) tool for managing your node installation. 
+You can use [nvm](https://github.com/creationix/nvm) tool for managing your node installation. 
 
 1) Fill in *server* (`"host", "username", path to "pem" file:, "env": "MONGO_URL":`), *env* (`"PORT", "ROOT_URL", "MONGO_URL"`) and *appName* data in config/mup.json
 3) Add credentials to `config/settings.json` file (your email credentials, kadira keys etc.)
