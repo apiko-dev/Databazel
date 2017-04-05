@@ -8,7 +8,7 @@ const SimpleEmail = ({ header, url, buttonText, additionalLink, children }) => (
       <div style={styles.mainDiv}>
         <a href={Meteor.absoluteUrl()} target="_blank">
           <img
-            src="http://databazel.com/assets/img/logos/databasel.png"
+            src="http://databazel.com/assets/img/logos/databazel.png"
             style={styles.logo}
             alt="Databazel logo"
           />
