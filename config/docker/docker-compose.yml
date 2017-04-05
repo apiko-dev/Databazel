@@ -39,8 +39,9 @@ services:
             },
             "private": {
               "gMail": {
-                "login": "postmaster@noreply.jssolutionsdev.com",
-                "password": "78eaa71f6a16077031b202947156df35",
+                "_comment": "Enter login, password, host and port - was used https://www.mailgun.com/",
+                "login": "login",
+                "password": "password",
                 "host": "smtp.mailgun.org",
                 "port": "465"
               }

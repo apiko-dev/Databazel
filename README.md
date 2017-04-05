@@ -34,7 +34,7 @@ You <b>can share</b> the created charts with your teammates.
 
 Run
 
-`sh databasel.sh`
+`sh databazel.sh`
 
 ## Default user
 

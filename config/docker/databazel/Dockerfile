@@ -19,12 +19,13 @@ WORKDIR /home/app
 
 ARG meteor_settings
 
-ENV MONGO_URL=mongodb://0.0.0.0:27017/databasel \
+ENV MONGO_URL=mongodb://0.0.0.0:27017/databazel \
     ROOT_URL=http://127.0.0.1 \
     PORT=3000 \
     METEOR_SETTINGS=$meteor_settings \
-    KADIRA_APP_ID=QZqWgvaNqqLBFhqSY \
-    KADIRA_APP_SECRET=03b4d0d8-60ce-4a36-bdda-3804610013a6
+# you may add kadira credentials for app debugging here
+#    KADIRA_APP_ID= \
+#    KADIRA_APP_SECRET=
 
 ENTRYPOINT ["node", "bundle/main.js"]
 

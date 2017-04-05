@@ -15,7 +15,7 @@ const styles = {
 
 const HelpdeskButton = () => (
   <IconButton
-    href="http://helpdesk.databasel.com"
+    href="http://helpdesk.databazel.com"
     target="_blank"
     style={styles.button}
     iconStyle={styles.icon}
