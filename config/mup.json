@@ -1,0 +1,28 @@
+{
+  "servers": [
+    {
+      "host": "host ip",
+      "username": "",
+      "pem": "path to pem file",
+      "env": {
+        "MONGO_URL": "mongo uri"
+      }
+    }
+  ],
+
+  "setupMongo": false,
+
+  "appName": "Name of your app",
+
+  "app": "../",
+
+  "env": {
+    "PORT": 80,
+    "ROOT_URL": "http://yourapp.com/",
+    "MONGO_URL": "mongo uri"
+  },
+
+  "deployCheckWaitTime": 120,
+
+  "enableUploadProgressBar": true
+}
