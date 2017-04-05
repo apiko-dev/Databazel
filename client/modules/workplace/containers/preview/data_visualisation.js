@@ -2,6 +2,11 @@ import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import i18n from 'meteor/universe:i18n';
 import DataVisualisation from '../../components/preview/data_visualisation.jsx';
 
+const formatQueries = (query) => {
+  const reg = /\.(.[^.]*:+.*)\./g;
+  return query.replace(reg, (result, $1) => '.`' + $1 + '`.');
+};
+
 export const composer = ({
   queryObject, viewObject, isLive, isQueryChanged, getQuasarData, savedQuery, context,
   }, onData) => {
@@ -12,7 +17,8 @@ export const composer = ({
   }
 
   if (isLive && isQueryChanged) {
-    getQuasarData(queryObject.fields, viewObject.query, false, ({ error, data = [] }) => {
+    const formattedQuery = formatQueries(viewObject.query);
+    getQuasarData(queryObject.fields, formattedQuery, false, ({ error, data = [] }) => {
       if (error) Notificator.snackbar(i18n.__('bad_request'), 'negative');
       onData(null, { data });
     });
