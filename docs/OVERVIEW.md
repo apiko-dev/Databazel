@@ -6,7 +6,7 @@ To start working with Databazel add a database to the app by typing its Mongo_UR
 </li>
  <li><b>Creating Charts.</b>
 Start creating your chart with choosing a DB (if you have added more than one). Then choose a collection to work with. You can join two collections as well.
-<a href="https://www.youtube.com/watch?v=o_QK66x899s"><img src="https://s3-eu-west-1.amazonaws.com/jssolutions/databazel/imgs/youtube_screen.png" /> </a>
+<a href="https://www.youtube.com/watch?v=o_QK66x899s"><img src="https://s3-eu-west-1.amazonaws.com/jssolutions/databazel/imgs/youtube_3.png" /> </a>
 </li>
  <ol type="I">
 <li><b>Collection fields.</b>
