@@ -120,7 +120,7 @@ class ChartItem extends React.Component {
               onTouchTap={this.exportDataToCsv}
               disabled={isExportInProgress}
               leftIcon={isExportInProgress ?
-                <CircularProgress size={0.3} style={styles.progress} />
+                <CircularProgress size={20} style={styles.progress} />
               : <FileFileDownload color={grey400} />
               }
             />
