@@ -17,7 +17,7 @@ fi
 
 which meteor && echo "meteor found" || curl https://install.meteor.com/ | sh
 
-meteor npm install
+npm install
 
 if [ ! -f ../quasar.jar ]
 then
@@ -25,6 +25,6 @@ then
 fi
 
 java -jar ../quasar.jar -c config/quasar.json &
-sudo meteor run --settings config/settings.json
+meteor run --settings config/settings.json
 
 exit 0

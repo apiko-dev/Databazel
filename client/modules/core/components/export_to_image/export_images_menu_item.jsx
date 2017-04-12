@@ -21,11 +21,12 @@ class ExportImageMenuItem extends React.Component {
         primaryText={i18n.__(dashboardName ? 'export_images' : 'export_image')}
         onTouchTap={() => this.setState({ isLoading: true })}
         disabled={this.state.isLoading}
+        id="export-image-menu-item"
         leftIcon={!this.state.isLoading ?
           <ImageIcon color={iconStyle ? iconStyle.color : grey600} />
           :
           <div>
-            <CircularProgress style={{ top: '-12px', left: '-14px' }} size={0.3} />
+            <CircularProgress size={20} />
             <ImageRenderer
               chartsId={chartsId}
               dashboardName={dashboardName}
