@@ -8,7 +8,7 @@ You can use [nvm](https://github.com/creationix/nvm) tool for managing your node
 ##### You should also use npm of 3.x.x version.
 You can check your version by  `npm -v` command.
 npm can be updated via `npm install npm -g`
-
+***
 1) Fill in *server* (`"host", "username", path to "pem" file:, "env": "MONGO_URL":`), *env* (`"PORT", "ROOT_URL", "MONGO_URL"`) and *appName* data in config/mup.json
 3) Add credentials to `config/settings.json` file (your email credentials, kadira keys etc.)
 3) use `deploy-quasar.sh` script to install software needed for running quasar-analytics tool at your server that you've configured in `mup.json`
