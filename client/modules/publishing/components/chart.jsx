@@ -32,7 +32,7 @@ const Chart = props => {
   }
   return (
     !!pivot
-      ? <PivotTable chart={chart} />
+      ? <PivotTable chart={Object.assign(chart, { data })} />
       : <SimpleTable chart={chart} />
   );
 };
