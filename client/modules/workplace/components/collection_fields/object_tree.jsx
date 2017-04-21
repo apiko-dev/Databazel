@@ -32,13 +32,11 @@ const toggleCollapse = (data, expression) => {
   if (path.length) {
     path.forEach(name => {
       link = link.nestedData.find(nestedElement =>
-        nestedElement.name === name.replace('`', '').replace('`', ''));
+        nestedElement.name === name.replace(new RegExp('\`', 'g'), ''));
     });
   }
 
-  if (link.hasOwnProperty('isCollapsed')) {
-    link.isCollapsed = !link.isCollapsed;
-  }
+  link.isCollapsed = !link.isCollapsed;
 
   return data;
 };
