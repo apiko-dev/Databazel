@@ -30,12 +30,6 @@ class ObjectItem extends React.Component {
     this.handelCloseContextMenu = this.handelCloseContextMenu.bind(this);
     this.handelOpenContextMenu = this.handelOpenContextMenu.bind(this);
   }
-  handleClick(e) {
-    const itemElem = e.currentTarget.parentNode;
-    const treeElem = itemElem.parentNode;
-    itemElem.firstElementChild.classList.toggle('tree-view_arrow-collapsed');
-    treeElem.lastElementChild.classList.toggle('tree-view_children-collapsed');
-  }
   dragEnd() {
     document.body.classList.remove('focus-elements');
   }
@@ -68,7 +62,7 @@ class ObjectItem extends React.Component {
     this.setState({ open: false });
   }
   render() {
-    const { data, nestLevel, collectionField, updateObjectTree } = this.props;
+    const { data, nestLevel, collectionField, updateObjectTree, onClick } = this.props;
     let objectSign;
     if (data.type === 'object') objectSign = '{}';
     if (data.type === 'array') objectSign = '[n]';
@@ -76,7 +70,7 @@ class ObjectItem extends React.Component {
       <div
         className="object-tree-item-label backlightDrag"
         onContextMenu={this.handelOpenContextMenu}
-        onClick={this.handleClick}
+        onClick={onClick}
         onDragStart={this.dragField}
         onDragEnd={this.dragEnd}
         draggable={!objectSign}
