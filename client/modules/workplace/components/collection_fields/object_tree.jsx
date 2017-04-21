@@ -15,17 +15,17 @@ const parseObj = obj => {
   return obj;
 };
 
-const findFirstIndex = (data, expression) => {
+const findFirstIndex = (data, collectionName) => {
   return data.findIndex(innerArray =>
     innerArray.some(collection =>
-      collection.name === expression.split('.')[0]
+      collection.name === collectionName
     )
   );
 };
 
 const toggleCollapse = (data, expression) => {
-  const firstIndex = findFirstIndex(data, expression);
   const path = expression.split('.');
+  const firstIndex = findFirstIndex(data, path[0]);
   let link = data[firstIndex][0];
 
   path.shift();
@@ -46,13 +46,13 @@ const toggleCollapse = (data, expression) => {
 class CollectionFields extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { data: this.props.data.map(d => d.map(parseObj)) };
+    this.state = { data: props.data ? props.data.map(d => d.map(parseObj)) : [] };
     this.treeView = this.treeView.bind(this);
     this.updateObjectTree = this.updateObjectTree.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    if (!_.isEqual(nextProps.data, this.state.data)) {
+    if (!_.isEqual(nextProps.data && nextProps.data.map(d => d.map(parseObj)), this.state.data)) {
       this.setState({ data: nextProps.data });
     }
   }
@@ -71,27 +71,25 @@ class CollectionFields extends React.Component {
             nestLevel={nestLevel}
             updateObjectTree={this.updateObjectTree}
             updateCollectionField={updateCollectionField}
-            onClick={this.handleClick(data)}
+            onClick={() => this.handleClick(data)}
           />
         }
         itemClassName={
           !data.nestedData ? `no-arrow nest-level-${nextLevel}` : `nest-level-${nextLevel}`
         }
         collapsed={data.isCollapsed}
-        onClick={this.handleClick(data)}
+        onClick={() => this.handleClick(data)}
       >
         {data.nestedData && data.nestedData.map((item, j) => this.treeView(item, j, nextLevel))}
       </TreeView>
     );
   }
   handleClick(field) {
-    if (field.type !== 'object') return null;
-    const { data } = this.state;
-    const self = this;
-      return () => {
-        const newData = toggleCollapse(data, field.expression);
-        self.setState({ data: newData });
-      };
+    if (field.nestedData) {
+      const { data } = this.state;
+      const newData = toggleCollapse(data, field.expression);
+      this.setState({ data: newData });
+    }
   }
   updateObjectTree() {
     this.setState({ data: this.state.data });
