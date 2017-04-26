@@ -4,11 +4,14 @@ import IconButton from 'material-ui/IconButton';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import { _ } from 'meteor/underscore';
+import LikeFilterInfoBtn from './like_filter_info_btn';
 
 class DropDown extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: props.value || props.items[0].value };
+    this.state = {
+      value: props.value || props.items[0].value,
+    };
     this.handelChange = this.handelChange.bind(this);
     this.getCurrentLabel = this.getCurrentLabel.bind(this);
     this.openMenu = this.openMenu.bind(this);
@@ -62,22 +65,27 @@ class DropDown extends React.Component {
 
   render() {
     const { items, dropDownStyle, tooltip } = this.props;
+    const { openMenu } = this.state;
+    const selectedValue = this.state.value;
+
     return (
       <div className="drop-down">
         <IconMenu
           onChange={this.handelChange}
-          value={this.state.value}
-          open={this.state.openMenu}
+          value={selectedValue}
+          open={openMenu}
           iconStyle={this.getIconStyle()}
           onTouchTap={this.openMenu}
           onRequestChange={value => this.setState({ openMenu: value })}
           iconButtonElement={
             <IconButton
-              tooltip={tooltip ? `${tooltip}: ${this.state.value}` : ''}
+              tooltip={tooltip ? `${tooltip}: ${selectedValue}` : ''}
               tooltipPosition="top-center"
               style={dropDownStyle.iconBtn}
+              iconClassName={'info'}
             >
               {this.getCurrentLabel()}
+
             </IconButton>
           }
         >
@@ -102,6 +110,7 @@ class DropDown extends React.Component {
             labelStyle={this.style.flatBtnLabel}
           />
         : ''}
+        {selectedValue === 'LIKE' ? <LikeFilterInfoBtn /> : ''}
       </div>
     );
   }
@@ -114,7 +123,6 @@ DropDown.propTypes = {
   dropDownStyle: PropTypes.object,
   onChange: PropTypes.func,
   tooltip: PropTypes.string,
-
 };
 
 export default DropDown;
