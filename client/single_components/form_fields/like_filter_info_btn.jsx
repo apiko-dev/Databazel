@@ -4,6 +4,56 @@ import Popover, { PopoverAnimationVertical } from 'material-ui/Popover';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn }
   from 'material-ui/Table';
 
+const style = {
+  infoBtnContainer: {
+    display: 'inline',
+  },
+  infoBtn: {
+    minWidth: '32px',
+  },
+  infoBtnIcon: {
+    verticalAlign: 'middle',
+  },
+  exampleCell: {
+    width: '25%',
+    padding: '8px',
+  },
+  descCell: {
+    width: '75%',
+    padding: '8px',
+  },
+  tableStyle: {
+    width: '600px',
+  },
+};
+
+const tableData = [
+  {
+    example: "LIKE 'a%'",
+    desc: "Finds any values that starts with 'a'",
+  },
+  {
+    example: "LIKE '%a'",
+    desc: "Finds any values that ends with 'a'",
+  },
+  {
+    example: "LIKE '%or%'",
+    desc: "Finds any values that have 'or' in any position",
+  },
+  {
+    example: "LIKE '_r%'",
+    desc: "Finds any values that have 'r' in the second position",
+  },
+  {
+    example: "LIKE 'a_%_%'",
+    desc: "Finds any values that starts with 'a' and are at least 3 characters in length",
+  },
+  {
+    example: "LIKE 'a%o'",
+    desc: "Finds any values that starts with 'a' and ends with 'o'",
+  },
+];
+
 class LikeFilterInfoBtn extends React.Component {
   constructor(props) {
     super(props);
@@ -12,55 +62,6 @@ class LikeFilterInfoBtn extends React.Component {
     };
     this.handlePopverTouchTap = this.handlePopverTouchTap.bind(this);
     this.handlePopverRequestClose = this.handlePopverRequestClose.bind(this);
-
-    this.style = {
-      infoBtnContainer: {
-        display: 'inline',
-      },
-      infoBtn: {
-        minWidth: '32px',
-      },
-      infoBtnIcon: {
-        verticalAlign: 'middle',
-      },
-      exampleCell: {
-        width: '25%',
-        padding: '8px',
-      },
-      descCell: {
-        width: '75%',
-        padding: '8px',
-      },
-      tableStyle: {
-        width: '600px',
-      },
-    };
-    this.tableData = [
-      {
-        example: "LIKE 'a%'",
-        desc: "Finds any values that starts with 'a'",
-      },
-      {
-        example: "LIKE '%a'",
-        desc: "Finds any values that ends with 'a'",
-      },
-      {
-        example: "LIKE '%or%'",
-        desc: "Finds any values that have 'or' in any position",
-      },
-      {
-        example: "LIKE '_r%'",
-        desc: "Finds any values that have 'r' in the second position",
-      },
-      {
-        example: "LIKE 'a_%_%'",
-        desc: "Finds any values that starts with 'a' and are at least 3 characters in length",
-      },
-      {
-        example: "LIKE 'a%o'",
-        desc: "Finds any values that starts with 'a' and ends with 'o'",
-      },
-    ];
   }
 
   handlePopverTouchTap(event) {
@@ -80,7 +81,7 @@ class LikeFilterInfoBtn extends React.Component {
   }
 
   render() {
-    const { handlePopverTouchTap, handlePopverRequestClose, tableData } = this;
+    const { handlePopverTouchTap, handlePopverRequestClose } = this;
     const { popoverOpen, popoverAnchorEl } = this.state;
     const {
       infoBtnContainer,
@@ -89,7 +90,7 @@ class LikeFilterInfoBtn extends React.Component {
       exampleCell,
       descCell,
       tableStyle,
-    } = this.style;
+    } = style;
 
     return (
       <div style={infoBtnContainer}>

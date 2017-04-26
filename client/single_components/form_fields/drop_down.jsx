@@ -6,32 +6,34 @@ import FlatButton from 'material-ui/FlatButton';
 import { _ } from 'meteor/underscore';
 import LikeFilterInfoBtn from './like_filter_info_btn';
 
+const style = {
+  innerDivStyle: {
+    textAlign: 'center',
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  flatBtn: {
+    width: '60px',
+    minWidth: '60px',
+    height: 'auto',
+    lineHeight: '10px',
+  },
+  flatBtnLabel: {
+    paddingLeft: 0,
+    paddingRight: 0,
+  },
+};
+
 class DropDown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       value: props.value || props.items[0].value,
+      isMenuOpen: false,
     };
     this.handelChange = this.handelChange.bind(this);
     this.getCurrentLabel = this.getCurrentLabel.bind(this);
     this.openMenu = this.openMenu.bind(this);
-    this.style = {
-      innerDivStyle: {
-        textAlign: 'center',
-        paddingTop: 5,
-        paddingBottom: 5,
-      },
-      flatBtn: {
-        width: '60px',
-        minWidth: '60px',
-        height: 'auto',
-        lineHeight: '10px',
-      },
-      flatBtnLabel: {
-        paddingLeft: 0,
-        paddingRight: 0,
-      },
-    };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -60,23 +62,23 @@ class DropDown extends React.Component {
   }
 
   openMenu() {
-    this.setState({ openMenu: !this.props.isMenuDisabled });
+    this.setState({ isMenuOpen: !this.props.isMenuDisabled });
   }
 
   render() {
     const { items, dropDownStyle, tooltip } = this.props;
-    const { openMenu } = this.state;
-    const selectedValue = this.state.value;
+    const { isMenuOpen, value: selectedValue } = this.state;
+    const { flatBtn, flatBtnLabel, innerDivStyle } = style;
 
     return (
       <div className="drop-down">
         <IconMenu
           onChange={this.handelChange}
           value={selectedValue}
-          open={openMenu}
+          open={isMenuOpen}
           iconStyle={this.getIconStyle()}
           onTouchTap={this.openMenu}
-          onRequestChange={value => this.setState({ openMenu: value })}
+          onRequestChange={value => this.setState({ isMenuOpen: value })}
           iconButtonElement={
             <IconButton
               tooltip={tooltip ? `${tooltip}: ${selectedValue}` : ''}
@@ -96,7 +98,7 @@ class DropDown extends React.Component {
                 value={item.value}
                 disabled={item.disabled}
                 primaryText={item.label}
-                innerDivStyle={this.style.innerDivStyle}
+                innerDivStyle={innerDivStyle}
               />
             : ''
           ))}
@@ -105,9 +107,9 @@ class DropDown extends React.Component {
           <FlatButton
             label={this.getCurrentLabel()}
             hoverColor="#fff"
-            onTouchTap={() => this.setState({ openMenu: true })}
-            style={this.style.flatBtn}
-            labelStyle={this.style.flatBtnLabel}
+            onTouchTap={() => this.setState({ isMenuOpen: true })}
+            style={flatBtn}
+            labelStyle={flatBtnLabel}
           />
         : ''}
         {selectedValue === 'LIKE' ? <LikeFilterInfoBtn /> : ''}
