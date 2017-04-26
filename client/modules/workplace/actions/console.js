@@ -76,9 +76,8 @@ function getHavingSnippet(fields) {
   const havingSnippet = _.chain(fields).map((field) => {
     const { filters } = field;
     if (!filters) return null;
-    const resultSnippet =
-      `(${getFilterSnippet(filters, field.processedExpression, field.currentType, field.grouping)})`;
-    return resultSnippet;
+    // eslint-disable-next-line max-len
+    return `(${getFilterSnippet(filters, field.processedExpression, field.currentType, field.grouping)})`;
   }).compact()
     .value();
   return havingSnippet.join(' AND\n\t');
