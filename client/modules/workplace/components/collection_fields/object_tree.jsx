@@ -26,18 +26,37 @@ const findFirstIndex = (data, collectionName) => {
 const toggleCollapse = (data, expression) => {
   const path = expression.split('.');
   const firstIndex = findFirstIndex(data, path[0]);
+  // eslint-disable-next-line
+  const correctionRegExp = new RegExp('\`', 'g');
   let link = data[firstIndex][0];
 
   path.shift();
+
   if (path.length) {
+    let isCollapsedArrayElement = false;
     path.forEach(name => {
-      link = link.nestedData.find(nestedElement =>
-        nestedElement.name === name.replace(new RegExp('\`', 'g'), ''));
+      link = link.nestedData.find(nestedElement => {
+        let res = false;
+        if (nestedElement.name === name.replace(correctionRegExp, '')) {
+          res = true;
+        } else {
+          if (nestedElement.type === 'array' &&
+            nestedElement.name === name.replace(correctionRegExp, '').replace(/\[\*\]$/, '')) {
+            isCollapsedArrayElement = true;
+            res = true;
+          }
+        }
+        return res;
+      });
+
+      if (isCollapsedArrayElement) {
+        link = link.nestedData[0];
+        isCollapsedArrayElement = false;
+      }
     });
   }
 
   link.isCollapsed = !link.isCollapsed;
-
   return data;
 };
 
