@@ -48,7 +48,6 @@ class AddObjectItem extends React.Component {
         name: fieldName,
         type: fieldType,
         nestedData: fieldType === 'object' || fieldType === 'array' ? [] : null,
-        isCollapsed: true,
       });
       updateObjectTree();
     }
