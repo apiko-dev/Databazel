@@ -24,65 +24,39 @@ const findFirstIndex = (data, collectionName) => {
 };
 
 const toggleCollapse = (data, expression) => {
-
-  // todo remove redudant code
   const path = expression.split('.');
   const firstIndex = findFirstIndex(data, path[0]);
+  // eslint-disable-next-line
+  const correctionRegExp = new RegExp('\`', 'g');
   let link = data[firstIndex][0];
+
   path.shift();
 
- /* eslint-disable */
-
   if (path.length) {
-    //console.log('path \n', path);
-    let isCollapsedArray = false;
+    let isCollapsedArrayElement = false;
     path.forEach(name => {
-      //let tmp = link;
       link = link.nestedData.find(nestedElement => {
-
-
         let res = false;
-
-        if (nestedElement.name === name.replace(new RegExp('\`', 'g'), '')) {
-          return true;
+        if (nestedElement.name === name.replace(correctionRegExp, '')) {
+          res = true;
         } else {
-
-          // console.log(nestedElement.name, ' === ', name);
-          // console.log('else if 9999999999999999999999999999999');
-          // console.log(nestedElement);
-          // console.log(link);
-
           if (nestedElement.type === 'array' &&
-            nestedElement.name === name.replace(new RegExp('\`', 'g'), '').replace(/\[\*\]$/, '')){
-            console.log('return true');
-            isCollapsedArray = true;
-            return true;
+            nestedElement.name === name.replace(correctionRegExp, '').replace(/\[\*\]$/, '')) {
+            isCollapsedArrayElement = true;
+            res = true;
           }
-
-          // if (name === `${link.name}[*]` && link.type === "array") {
-          //   console.log('else if 9999999999999999999999999999999');
-          //   return true;
-          // }
         }
-
         return res;
       });
 
-      if (isCollapsedArray) {
+      if (isCollapsedArrayElement) {
         link = link.nestedData[0];
-        isCollapsedArray = false;
+        isCollapsedArrayElement = false;
       }
-
-
-
-      console.log('link !!!!!!!!!!!!!', link);
     });
   }
 
-  // todo find bug here
-
   link.isCollapsed = !link.isCollapsed;
-
   return data;
 };
 
