@@ -27,8 +27,8 @@ class CollectionFields extends React.Component {
   treeView(data, i, nestLevel) {
     const { collectionFields, updateCollectionField } = this.props;
     const nextLevel = nestLevel + 1;
-    const fieldPath = data.expression;
-    const collectionField = collectionFields ? collectionFields[fieldPath] : null;
+    const dataExpression = data.expression;
+    const collectionField = collectionFields ? collectionFields[dataExpression] : null;
 
     return (
       <TreeView
@@ -46,23 +46,25 @@ class CollectionFields extends React.Component {
         itemClassName={
           !data.nestedData ? `no-arrow nest-level-${nextLevel}` : `nest-level-${nextLevel}`
         }
-        collapsed={this.isCollapsed(fieldPath)}
-        onClick={() => this.handleClick(fieldPath)}
+        collapsed={this.isCollapsed(dataExpression)}
+        onClick={() => this.handleClick(dataExpression)}
       >
         {data.nestedData && data.nestedData.map((item, j) => this.treeView(item, j, nextLevel))}
       </TreeView>
     );
   }
-  handleClick(fieldPath) {
-    const { openItems } = this.state;
-    if (this.isCollapsed(fieldPath)) {
-      this.setState({
-        openItems: openItems.concat([fieldPath]),
-      });
-    } else {
-      this.setState({
-        openItems: openItems.filter(p => p !== fieldPath),
-      });
+  handleClick(dataExpression) {
+    if (typeof dataExpression === 'string') {
+      const { openItems } = this.state;
+      if (this.isCollapsed(dataExpression)) {
+        this.setState({
+          openItems: openItems.concat([dataExpression]),
+        });
+      } else {
+        this.setState({
+          openItems: openItems.filter(p => p !== dataExpression),
+        });
+      }
     }
   }
   updateObjectTree() {
