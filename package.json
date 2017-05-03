@@ -2,7 +2,7 @@
   "name": "databazel",
   "version": "0.0.1",
   "scripts": {
-    "start": "meteor run",
+    "start": "meteor run --settings config/settings.json",
     "quasar": "java -jar ../quasar.jar -c config/quasar.json",
     "lint": "eslint .",
     "lintfix": "npm run lint -- --fix",
