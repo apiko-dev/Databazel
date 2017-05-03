@@ -5,6 +5,15 @@ import TreeView from 'react-treeview';
 import ObjectItem from './object_item.jsx';
 import JoiningFields from '../../containers/joining_collections';
 
+const getFieldPath = (field) => {
+  if (typeof field === 'string') {
+    return field;
+  } else if (typeof field === 'object') {
+    return field.nestedData ? field.expression : null;
+  }
+  return null;
+};
+
 class CollectionFields extends React.Component {
   constructor(props) {
     super(props);
@@ -21,14 +30,14 @@ class CollectionFields extends React.Component {
       this.setState({ data: nextProps.data });
     }
   }
-  isCollapsed(fieldPath) {
-    return !~this.state.openItems.indexOf(fieldPath);
+  isCollapsed(field) {
+    return !~this.state.openItems.indexOf(getFieldPath(field));
   }
   treeView(data, i, nestLevel) {
     const { collectionFields, updateCollectionField } = this.props;
     const nextLevel = nestLevel + 1;
-    const dataExpression = data.expression;
-    const collectionField = collectionFields ? collectionFields[dataExpression] : null;
+    const field = data.expression;
+    const collectionField = collectionFields ? collectionFields[field] : null;
 
     return (
       <TreeView
@@ -46,26 +55,24 @@ class CollectionFields extends React.Component {
         itemClassName={
           !data.nestedData ? `no-arrow nest-level-${nextLevel}` : `nest-level-${nextLevel}`
         }
-        collapsed={this.isCollapsed(dataExpression)}
-        onClick={() => this.handleClick(dataExpression)}
+        collapsed={this.isCollapsed(field)}
+        onClick={() => this.handleClick(field)}
       >
         {data.nestedData && data.nestedData.map((item, j) => this.treeView(item, j, nextLevel))}
       </TreeView>
     );
   }
-  handleClick(dataExpression) {
-    if (typeof dataExpression === 'string') {
-      const { openItems } = this.state;
-      if (this.isCollapsed(dataExpression)) {
-        this.setState({
-          openItems: openItems.concat([dataExpression]),
-        });
-      } else {
-        this.setState({
-          openItems: openItems.filter(p => p !== dataExpression),
-        });
-      }
-    }
+  handleClick(field) {
+    const fieldPath = getFieldPath(field);
+    if (!fieldPath) return;
+
+    const { openItems } = this.state;
+    const newItems = this.isCollapsed(fieldPath)
+      ? openItems.concat([fieldPath])
+      : openItems.filter(p => p !== fieldPath);
+    this.setState({
+      openItems: newItems,
+    });
   }
   updateObjectTree() {
     this.setState({ data: this.state.data });
