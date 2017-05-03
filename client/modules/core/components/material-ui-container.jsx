@@ -6,7 +6,7 @@ import { grey800 } from 'material-ui/styles/colors';
 
 const muiTheme = getMuiTheme({
   zIndex: {
-    layer: 1400,
+    layer: 1500,
   },
   palette: {
     textColor: grey800,
