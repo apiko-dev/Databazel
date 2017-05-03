@@ -11,7 +11,7 @@ const styles = {
     width: 'calc(100% - 212px)',
   },
   fieldType: {
-    top: '-8px',
+    top: '15px',
     width: '200px',
     marginLeft: '12px',
   },
