@@ -36,9 +36,6 @@ export default {
     }
   },
   updateSorting({ LocalState }, column) {
-
-    console.log('updateSorting function');
-
     const col = typeof column === 'object' ?
       _.omit(column, ['colGroup1Value', 'colGroup2Value']) : column;
     const viewObject = LocalState.get('VIEW_OBJECT');

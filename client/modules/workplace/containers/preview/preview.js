@@ -4,12 +4,6 @@ import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 export const composer = ({ context, getStringSQLQuery }, onData) => {
   const { LocalState } = context();
   const queryObject = LocalState.get('SQL_QUERY_OBJECT') || {};
-
-  console.log('get SQL_QUERY_OBJECT before fail');
-  console.log(LocalState.get('SQL_QUERY_OBJECT'));
-  console.log('View object pivot');
-  console.log(LocalState.get('VIEW_OBJECT').pivot);
-
   const viewObject = LocalState.get('VIEW_OBJECT') || {};
 
   viewObject.query = getStringSQLQuery(queryObject);

@@ -17,6 +17,11 @@ export default {
 
 
     console.log('Old sql query ', oldQueryObj);
+
+    //todo
+    // there are problems with parsed object
+    // there are no filters fields in fields array items
+
     console.log('Parserd sql query', queryObj);
 
     LocalState.set('SQL_QUERY_OBJECT', queryObj);
@@ -135,18 +140,9 @@ function setFieldsConstructorsType(fieldsList, LocalState) {
     }
   });
 
-  // console.log('......................................');
-  // console.log('Construcor types ', constructorTypes);
-
-
   if (isConstructorsFinded) {
     const viewObj = LocalState.get('VIEW_OBJECT');
     viewObj.pivot.model.constructors = constructorTypes;
-
-    console.log('/////////////////////////////////////////');
-    console.log('fields ', fieldsList);
-    console.log('saved constructors ', viewObj.pivot.model.constructors);
-
     LocalState.set('VIEW_OBJECT', viewObj);
   }
 }

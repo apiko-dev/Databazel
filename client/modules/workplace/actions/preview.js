@@ -39,51 +39,19 @@ export default {
     const database = LocalState.get('CURRENT_DATABASE');
     LocalState.set('QUASAR_REQUEST_ID', requestId);
 
-    // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-    // console.log('get  qusaar data method call');
-
     Meteor.call('quasar.getData', database, query, requestId,
       (err, { data = [], answerId } = {}) => {
         if (err) {
-          // console.log('!!!!!!!!!!!method call error');
-          // console.log(err);
           cb({ error: true });
         }
         else if (LocalState.get('QUASAR_REQUEST_ID') === answerId || isSingleRequest) {
-          // console.log('!!!!!!!!!!!method call success');
-          // console.log('data  ', data);
-          // console.log('fields ', fields);
-
-
-          // console.log('!!!!!! Client Processong data after submitting sql editor ');
           const processedData = dataProcessing.process(data, fields);
-          // console.log('222222222222222222222222 before callback');
           cb({ data: processedData });
         }
       }
     );
   },
   determineDefaultFields({ Notificator, LocalState }, fields, chartType, pivot) {
-
-    // todo
-    // there are problen in this function
-
-    // console.log('determineDefaultFields function call 222222222');
-
-    // console.log('notificator ', Notificator);
-    // console.log('fields ', fields);
-    // console.log('chartType ', chartType);
-    // console.log('pivot ', pivot);
-
-    console.log('///////////////////////////////////////////////');
-    // console.log('fields ', fields);
-    // console.log('recieved constructors ', pivot.model.constructors);
-
-
-    const viewObj = LocalState.get('VIEW_OBJECT');
-
-    // console.log('ViewObject ', viewObj);
-
     let result;
     if (pivot && pivot.model) {
       if (pivot.model.constructors) {
@@ -133,16 +101,10 @@ export default {
       if (neededFields.filter(f => f.id).length) result = fields;
     }
 
-    console.log('result ', result);
-
     return result;
 
     function determineFieldsBySavedConstructors(fieldsArr, constructors) {
-      console.log('dimentions ', constructors.dimensions);
-      console.log('measures ', constructors.measures);
-
       fieldsArr.forEach(field => {
-        console.log(field.name, ' filed id=', field.id, 'dimentions includes ', constructors.dimensions.includes(field.id));
         if (constructors.dimensions.includes(field.id)) {
           field.constructorType = 'dimensions';
         } else if (constructors.measures.includes(field.id)) {
