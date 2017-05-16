@@ -4,9 +4,6 @@ import SQLParser from '/lib/sql_parser';
 
 export default {
   setSQLQuery({ LocalState }, query) {
-    console.log('|||||||||||||||||||||||||||||||||||||||||');
-    console.log('Set sql query object fubction  after submit sql form');
-
     const fields = LocalState.get('COLLECTION_FIELDS');
     const oldQueryObj = LocalState.get('SQL_QUERY_OBJECT');
     setFieldsConstructorsType(oldQueryObj.fields, LocalState);
@@ -14,15 +11,6 @@ export default {
     const queryObj = SQLParser.parseToQueryObject(query, fields);
     queryObj.from = oldQueryObj.from;
     queryObj.on = oldQueryObj.on;
-
-
-    console.log('Old sql query ', oldQueryObj);
-
-    //todo
-    // there are problems with parsed object
-    // there are no filters fields in fields array items
-
-    console.log('Parserd sql query', queryObj);
 
     LocalState.set('SQL_QUERY_OBJECT', queryObj);
   },

@@ -24,14 +24,6 @@ class ChartCanvas extends React.Component {
 
   render() {
     const { data, fields, chartType, heightIsFixed, tableType, needRedraw, maxHeight } = this.props;
-
-
-    // console.log('Render chart canvas!!');
-    // console.log('Data processing call after submit sql editor');
-    // console.log('fields ', fields);
-
-    // there are wrong data in fields object
-
     const chartData = dataProcessing.chart(data, fields, chartType, tableType);
     const Chart = getChart(chartType);
     let height;

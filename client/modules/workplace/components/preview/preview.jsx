@@ -43,10 +43,6 @@ class Preview extends React.Component {
   render() {
     const { savedQuery, queryObject, viewObject, tableType } = this.props;
     const { isQueryChanged, isLive } = this.state;
-
-    // console.log('components/ preview.jsx');
-    // console.log('fields ', queryObject.fields);
-
     const isFields = !_.isEmpty(queryObject.fields);
 
     return (

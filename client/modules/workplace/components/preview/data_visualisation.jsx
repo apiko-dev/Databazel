@@ -23,9 +23,6 @@ class DataVisualisation extends React.Component {
     const { chartType } = viewObject;
     const tableHeight = `${window.innerHeight - 74}px`;
 
-    // console.log('preview/data_visualization file!!!!!!');
-    // console.log('fields ', queryObject.fields);
-
     return (
       <div className="data-visualisation">
         {tableType === 'simple' &&
