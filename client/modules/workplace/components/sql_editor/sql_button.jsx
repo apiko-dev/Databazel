@@ -39,6 +39,9 @@ class SQLButton extends React.Component {
     this.setState({ query });
   }
   handleSubmit() {
+
+    // console.log('SQl editor submit !!!!!');
+
     const { query } = this.state;
     if (query !== this.props.query) {
       this.props.setSQLQuery(query);

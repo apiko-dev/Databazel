@@ -4,11 +4,21 @@ import SQLParser from '/lib/sql_parser';
 
 export default {
   setSQLQuery({ LocalState }, query) {
+    console.log('|||||||||||||||||||||||||||||||||||||||||');
+    console.log('Set sql query object fubction  after submit sql form');
+
     const fields = LocalState.get('COLLECTION_FIELDS');
     const oldQueryObj = LocalState.get('SQL_QUERY_OBJECT');
+    setFieldsConstructorsType(oldQueryObj.fields, LocalState);
+
     const queryObj = SQLParser.parseToQueryObject(query, fields);
     queryObj.from = oldQueryObj.from;
     queryObj.on = oldQueryObj.on;
+
+
+    console.log('Old sql query ', oldQueryObj);
+    console.log('Parserd sql query', queryObj);
+
     LocalState.set('SQL_QUERY_OBJECT', queryObj);
   },
 
@@ -106,6 +116,37 @@ function resetData(LocalState) {
   const viewObj = LocalState.get('VIEW_OBJECT');
   if (viewObj && viewObj.data) {
     delete viewObj.data;
+    LocalState.set('VIEW_OBJECT', viewObj);
+  }
+}
+
+function setFieldsConstructorsType(fieldsList, LocalState) {
+  let isConstructorsFinded = false;
+  const constructorTypes = {
+    measures: [],
+    dimensions: [],
+  };
+
+  fieldsList.forEach((item, index) => {
+    const constructorType = item.constructorType;
+    if (constructorType) {
+      constructorTypes[constructorType].push(index);
+      isConstructorsFinded = true;
+    }
+  });
+
+  // console.log('......................................');
+  // console.log('Construcor types ', constructorTypes);
+
+
+  if (isConstructorsFinded) {
+    const viewObj = LocalState.get('VIEW_OBJECT');
+    viewObj.pivot.model.constructors = constructorTypes;
+
+    console.log('/////////////////////////////////////////');
+    console.log('fields ', fieldsList);
+    console.log('saved constructors ', viewObj.pivot.model.constructors);
+
     LocalState.set('VIEW_OBJECT', viewObj);
   }
 }
