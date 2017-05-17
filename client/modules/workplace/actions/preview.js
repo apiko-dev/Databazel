@@ -51,13 +51,37 @@ export default {
       }
     );
   },
+
   determineDefaultFields({ Notificator, LocalState }, fields, chartType, pivot) {
+    const determineFieldsBySavedConstructors = (fieldsArr, constructors) =>
+      fieldsArr.map(field => {
+        if (constructors.dimensions.includes(field.id)) {
+          field.constructorType = 'dimensions';
+        } else if (constructors.measures.includes(field.id)) {
+          field.constructorType = 'measures';
+        }
+        return field;
+      });
+    const determineFieldsByModel = (fieldsArr, pivotModel) => {
+      const measuresId = pivotModel.values;
+      let dimensionsCounter = 0;
+      return fieldsArr.map(field => {
+        if (!~measuresId.indexOf(field.id)) {
+          dimensionsCounter++;
+          if (dimensionsCounter < 3) field.constructorType = 'dimensions';
+        } else {
+          field.constructorType = 'measures';
+        }
+        return field;
+      });
+    };
     let result;
+
     if (pivot && pivot.model) {
       if (pivot.model.constructors) {
         result = determineFieldsBySavedConstructors(fields, pivot.model.constructors);
       } else {
-        result = determineFieldsByModel(fields);
+        result = determineFieldsByModel(fields, pivot.model);
       }
     } else
       {
@@ -102,37 +126,12 @@ export default {
     }
 
     return result;
-
-    function determineFieldsBySavedConstructors(fieldsArr, constructors) {
-      fieldsArr.forEach(field => {
-        if (constructors.dimensions.includes(field.id)) {
-          field.constructorType = 'dimensions';
-        } else if (constructors.measures.includes(field.id)) {
-          field.constructorType = 'measures';
-        }
-      });
-      return fieldsArr;
-    }
-
-    function determineFieldsByModel(fieldsArr) {
-      const measuresId = pivot.model.values;
-      let dimensionsCounter = 0;
-      fieldsArr.forEach(f => {
-        if (!~measuresId.indexOf(f.id)) {
-          dimensionsCounter++;
-          if (dimensionsCounter < 3) f.constructorType = 'dimensions';
-        } else {
-          f.constructorType = 'measures';
-        }
-      });
-      return fieldsArr;
-    }
   },
 
   getNewChartModelFields(context, { chartType, fields }, { fieldId, isChecked, label }) {
     const checkedFieldsNumber = fields.filter(f => f.constructorType === label).length;
     const newFields = fields.map(f => _.extend(_.clone(f),
-        f.id === fieldId ? { constructorType: isChecked ? label : null } : {})
+      f.id === fieldId ? { constructorType: isChecked ? label : null } : {})
     );
     const maxCheckedFields = (() => {
       let res = chartTypeRules[chartType][label];

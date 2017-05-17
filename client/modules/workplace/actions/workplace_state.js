@@ -6,7 +6,13 @@ export default {
   setSQLQuery({ LocalState }, query) {
     const fields = LocalState.get('COLLECTION_FIELDS');
     const oldQueryObj = LocalState.get('SQL_QUERY_OBJECT');
-    setFieldsConstructorsType(oldQueryObj.fields, LocalState);
+    const fieldsConstructors = getFieldsConstructorsType(oldQueryObj.fields);
+
+    if (fieldsConstructors) {
+      const viewObj = LocalState.get('VIEW_OBJECT');
+      viewObj.pivot.model.constructors = fieldsConstructors;
+      LocalState.set('VIEW_OBJECT', viewObj);
+    }
 
     const queryObj = SQLParser.parseToQueryObject(query, fields);
     queryObj.from = oldQueryObj.from;
@@ -113,8 +119,9 @@ function resetData(LocalState) {
   }
 }
 
-function setFieldsConstructorsType(fieldsList, LocalState) {
-  let isConstructorsFinded = false;
+function getFieldsConstructorsType(fieldsList, LocalState) {
+  let isConstructorsFound = false;
+  let result = false;
   const constructorTypes = {
     measures: [],
     dimensions: [],
@@ -124,13 +131,11 @@ function setFieldsConstructorsType(fieldsList, LocalState) {
     const constructorType = item.constructorType;
     if (constructorType) {
       constructorTypes[constructorType].push(index);
-      isConstructorsFinded = true;
+      isConstructorsFound = true;
     }
   });
 
-  if (isConstructorsFinded) {
-    const viewObj = LocalState.get('VIEW_OBJECT');
-    viewObj.pivot.model.constructors = constructorTypes;
-    LocalState.set('VIEW_OBJECT', viewObj);
-  }
+  if (isConstructorsFound) { result = constructorTypes; }
+
+  return result;
 }
