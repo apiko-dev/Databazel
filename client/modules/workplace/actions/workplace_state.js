@@ -10,7 +10,7 @@ export default {
 
     if (fieldsConstructors) {
       const viewObj = LocalState.get('VIEW_OBJECT');
-      viewObj.pivot.model.constructors = fieldsConstructors;
+      viewObj.fieldsConstructors = fieldsConstructors;
       LocalState.set('VIEW_OBJECT', viewObj);
     }
 
@@ -119,23 +119,27 @@ function resetData(LocalState) {
   }
 }
 
-function getFieldsConstructorsType(fieldsList, LocalState) {
+function getFieldsConstructorsType(fieldsList) {
   let isConstructorsFound = false;
-  let result = false;
   const constructorTypes = {
     measures: [],
     dimensions: [],
   };
 
-  fieldsList.forEach((item, index) => {
-    const constructorType = item.constructorType;
+  let result = fieldsList.map((field, index) => {
+    const constructorType = field.constructorType;
     if (constructorType) {
       constructorTypes[constructorType].push(index);
       isConstructorsFound = true;
     }
+    return field;
   });
 
-  if (isConstructorsFound) { result = constructorTypes; }
+  if (isConstructorsFound) {
+    result = constructorTypes;
+  } else {
+    result = false;
+  }
 
   return result;
 }

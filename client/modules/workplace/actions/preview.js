@@ -52,6 +52,8 @@ export default {
     );
   },
 
+  // todo !!!
+  // this function must be refactored in th future
   determineDefaultFields({ Notificator, LocalState }, fields, chartType, pivot) {
     const determineFieldsBySavedConstructors = (fieldsArr, constructors) =>
       fieldsArr.map(field => {
@@ -75,16 +77,16 @@ export default {
         return field;
       });
     };
+    const viewObj = LocalState.get('VIEW_OBJECT');
     let result;
 
+    if (viewObj.fieldsConstructors) {
+      return determineFieldsBySavedConstructors(fields, viewObj.fieldsConstructors);
+    }
+
     if (pivot && pivot.model) {
-      if (pivot.model.constructors) {
-        result = determineFieldsBySavedConstructors(fields, pivot.model.constructors);
-      } else {
-        result = determineFieldsByModel(fields, pivot.model);
-      }
-    } else
-      {
+      result = determineFieldsByModel(fields, pivot.model);
+    } else {
       const getNeededfields = () => {
         const fieldsArray = [];
         _.each(chartTypeRules[chartType], (val, key) => {
