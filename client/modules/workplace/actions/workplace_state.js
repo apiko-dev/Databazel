@@ -1,6 +1,6 @@
 import { _ } from 'meteor/underscore';
 import { pivotCellsLimit } from '/lib/constants';
-import SQLParser from '/lib/sql_parser';
+import { parseToQueryObject } from '/lib/sql_parser';
 
 export default {
   setSQLQuery({ LocalState }, query) {
@@ -14,7 +14,7 @@ export default {
       LocalState.set('VIEW_OBJECT', viewObj);
     }
 
-    const queryObj = SQLParser.parseToQueryObject(query, fields);
+    const queryObj = parseToQueryObject(query, fields);
     queryObj.from = oldQueryObj.from;
     queryObj.on = oldQueryObj.on;
 
@@ -119,27 +119,24 @@ function resetData(LocalState) {
   }
 }
 
-function getFieldsConstructorsType(fieldsList) {
-  let isConstructorsFound = false;
-  const constructorTypes = {
+const isPropEmptyArray = (prop, obj) => !obj[prop].length;
+
+const getFieldsConstructor = fields => fields.reduce(
+  (constructor, { constructorType }, index) => {
+    if (constructorType) {
+      constructor[constructorType].push(index);
+    }
+    return constructor;
+  }, {
     measures: [],
     dimensions: [],
-  };
-
-  let result = fieldsList.map((field, index) => {
-    const constructorType = field.constructorType;
-    if (constructorType) {
-      constructorTypes[constructorType].push(index);
-      isConstructorsFound = true;
-    }
-    return field;
-  });
-
-  if (isConstructorsFound) {
-    result = constructorTypes;
-  } else {
-    result = false;
   }
+);
 
-  return result;
+function getFieldsConstructorsType(fields) {
+  const constructor = getFieldsConstructor(fields);
+  const isDimensions = !isPropEmptyArray('dimensions', constructor);
+  const isMeasures = !isPropEmptyArray('measures', constructor);
+
+  return (isDimensions || isMeasures) ? constructor : false;
 }
