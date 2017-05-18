@@ -44,6 +44,7 @@ class Preview extends React.Component {
     const { savedQuery, queryObject, viewObject, tableType } = this.props;
     const { isQueryChanged, isLive } = this.state;
     const isFields = !_.isEmpty(queryObject.fields);
+
     return (
       <div
         className="preview-wrap"

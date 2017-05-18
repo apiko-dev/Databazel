@@ -38,9 +38,12 @@ export default {
     const requestId = _.uniqueId();
     const database = LocalState.get('CURRENT_DATABASE');
     LocalState.set('QUASAR_REQUEST_ID', requestId);
+
     Meteor.call('quasar.getData', database, query, requestId,
       (err, { data = [], answerId } = {}) => {
-        if (err) cb({ error: true });
+        if (err) {
+          cb({ error: true });
+        }
         else if (LocalState.get('QUASAR_REQUEST_ID') === answerId || isSingleRequest) {
           const processedData = dataProcessing.process(data, fields);
           cb({ data: processedData });
@@ -48,20 +51,41 @@ export default {
       }
     );
   },
-  determineDefaultFields({ Notificator }, fields, chartType, pivot) {
-    let result;
-    if (pivot && pivot.model) {
-      const measuresId = pivot.model.values;
-      let dimensionsCounter = 0;
-      fields.forEach(f => {
-        if (!~measuresId.indexOf(f.id)) {
-          dimensionsCounter++;
-          if (dimensionsCounter < 3) f.constructorType = 'dimensions';
-        } else {
-          f.constructorType = 'measures';
+
+  // todo !!!
+  // this function must be refactored in th future
+  determineDefaultFields({ Notificator, LocalState }, fields, chartType, pivot) {
+    const determineFieldsBySavedConstructors = (fieldsArr, constructors) =>
+      fieldsArr.map(field => {
+        if (constructors.dimensions.includes(field.id)) {
+          field.constructorType = 'dimensions';
+        } else if (constructors.measures.includes(field.id)) {
+          field.constructorType = 'measures';
         }
+        return field;
       });
-      result = fields;
+    const determineFieldsByModel = (fieldsArr, pivotModel) => {
+      const measuresId = pivotModel.values;
+      let dimensionsCounter = 0;
+      return fieldsArr.map(field => {
+        if (!~measuresId.indexOf(field.id)) {
+          dimensionsCounter++;
+          if (dimensionsCounter < 3) field.constructorType = 'dimensions';
+        } else {
+          field.constructorType = 'measures';
+        }
+        return field;
+      });
+    };
+    const viewObj = LocalState.get('VIEW_OBJECT');
+    let result;
+
+    if (viewObj.fieldsConstructors) {
+      return determineFieldsBySavedConstructors(fields, viewObj.fieldsConstructors);
+    }
+
+    if (pivot && pivot.model) {
+      result = determineFieldsByModel(fields, pivot.model);
     } else {
       const getNeededfields = () => {
         const fieldsArray = [];
@@ -102,13 +126,14 @@ export default {
       });
       if (neededFields.filter(f => f.id).length) result = fields;
     }
+
     return result;
   },
 
   getNewChartModelFields(context, { chartType, fields }, { fieldId, isChecked, label }) {
     const checkedFieldsNumber = fields.filter(f => f.constructorType === label).length;
     const newFields = fields.map(f => _.extend(_.clone(f),
-        f.id === fieldId ? { constructorType: isChecked ? label : null } : {})
+      f.id === fieldId ? { constructorType: isChecked ? label : null } : {})
     );
     const maxCheckedFields = (() => {
       let res = chartTypeRules[chartType][label];

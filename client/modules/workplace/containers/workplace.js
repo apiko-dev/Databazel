@@ -12,6 +12,7 @@ export const composer = ({ context, setSQLQueryObj }, onData) => {
     const { chartType, query: savedQuery } = viewObject;
     parseCollectionFieldNames(queryObject.collectionFields);
     setSQLQueryObj(queryObject, tableType);
+
     LocalState.set('VIEW_OBJECT', viewObject);
     onData(null, { isSavedChart: true, tableType, chartType, savedQuery });
   }

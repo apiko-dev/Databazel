@@ -18,6 +18,7 @@ const Chart = props => {
   }
   const { viewObject: { data, chartType, dataTimeStamp, pivot }, queryObject } = chart;
   const needRedraw = !dataTimeStamp || Date.now() - dataTimeStamp < 1000;
+
   if (chartType) {
     return (
       <ChartCanvas

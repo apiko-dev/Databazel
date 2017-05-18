@@ -22,6 +22,7 @@ class DataVisualisation extends React.Component {
       updateSQLQueryObj } = this.props;
     const { chartType } = viewObject;
     const tableHeight = `${window.innerHeight - 74}px`;
+
     return (
       <div className="data-visualisation">
         {tableType === 'simple' &&

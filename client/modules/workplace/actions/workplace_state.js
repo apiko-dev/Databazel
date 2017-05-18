@@ -1,14 +1,23 @@
 import { _ } from 'meteor/underscore';
 import { pivotCellsLimit } from '/lib/constants';
-import SQLParser from '/lib/sql_parser';
+import { parseToQueryObject } from '/lib/sql_parser';
 
 export default {
   setSQLQuery({ LocalState }, query) {
     const fields = LocalState.get('COLLECTION_FIELDS');
     const oldQueryObj = LocalState.get('SQL_QUERY_OBJECT');
-    const queryObj = SQLParser.parseToQueryObject(query, fields);
+    const fieldsConstructors = getFieldsConstructorsType(oldQueryObj.fields);
+
+    if (fieldsConstructors) {
+      const viewObj = LocalState.get('VIEW_OBJECT');
+      viewObj.fieldsConstructors = fieldsConstructors;
+      LocalState.set('VIEW_OBJECT', viewObj);
+    }
+
+    const queryObj = parseToQueryObject(query, fields);
     queryObj.from = oldQueryObj.from;
     queryObj.on = oldQueryObj.on;
+
     LocalState.set('SQL_QUERY_OBJECT', queryObj);
   },
 
@@ -108,4 +117,26 @@ function resetData(LocalState) {
     delete viewObj.data;
     LocalState.set('VIEW_OBJECT', viewObj);
   }
+}
+
+const isPropEmptyArray = (prop, obj) => !obj[prop].length;
+
+const getFieldsConstructor = fields => fields.reduce(
+  (constructor, { constructorType }, index) => {
+    if (constructorType) {
+      constructor[constructorType].push(index);
+    }
+    return constructor;
+  }, {
+    measures: [],
+    dimensions: [],
+  }
+);
+
+function getFieldsConstructorsType(fields) {
+  const constructor = getFieldsConstructor(fields);
+  const isDimensions = !isPropEmptyArray('dimensions', constructor);
+  const isMeasures = !isPropEmptyArray('measures', constructor);
+
+  return (isDimensions || isMeasures) ? constructor : false;
 }

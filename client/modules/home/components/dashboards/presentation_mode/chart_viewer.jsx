@@ -17,6 +17,7 @@ const ChartViewer = ({ dashboard, charts, meteorMethodCall, routeTo, setChartVie
     prevArrow: <NavButton />,
     nextArrow: <NavButton right />,
   };
+
   return (
     <div
       className="chart-viewer anchor-for-click"
